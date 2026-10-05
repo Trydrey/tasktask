@@ -9,6 +9,13 @@ export async function PATCH(request, { params }) {
     const { id } = await params;
 
     const body = await request.json();
+    if (typeof completed !== "boolean") {
+     return NextResponse.json(
+       { error: "completed must be true or false." },
+       { status: 400 }
+     );
+   }
+    
 
     const { completed } = body;
 
@@ -51,9 +58,6 @@ export async function PATCH(request, { params }) {
   }
 }
 
-import { NextResponse } from 'next/server';
-import dbConnect from '@/lib/db';
-import Task from '@/models/Task';
 
 export async function DELETE(request, { params }) {
   try {
