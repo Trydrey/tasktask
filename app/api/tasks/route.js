@@ -30,7 +30,7 @@ export async function POST(request) {
   } catch (error) {
     if (error.name === 'ValidationError') {
       return NextResponse.json(
-        { error: 'Bad Request: Title is required and cannot be empty.' },
+       { error: error.errors.title?.message || "Invalid task data." },
         { status: 400 }
       );
     }
